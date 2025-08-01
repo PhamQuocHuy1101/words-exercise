@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Exercise</title>
+  <link rel="stylesheet" href="/static/css/exercise.css">
+</head>
+<body>
+ <div id="container">
+  <!-- LEFT SIDE: Topic Selector -->
+  <div id="sidebar">
+    <h3 class="route" onclick="goToHome()">🏠 Home Page</h3>
+    <h3>📚 Topics</h3>
+    <div id="topicList"></div>
+    <button onclick="startExercise()">Start</button>
+  </div>
+
+  <!-- RIGHT SIDE: Chat Interface -->
+  <div id="main">
+    <h2>💬 Exercise</h2>
+    <div id="chatBox"></div>
+    <div id="inputBar">
+      <input id="userInput" type="text" placeholder="Type your answer..." />
+      <button id="sendBtn" onclick="submitAnswer()">Send</button>
+    </div>
+  </div>
+</div>
+
+  <script src="/static/js/exercise.js"></script>
+</body>
+</html>

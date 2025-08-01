@@ -1,0 +1,155 @@
+body {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+header, main {
+  margin-bottom: 10px;
+}
+.route:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button {
+  font-size: 16px;
+  padding: 8px 16px;
+  margin: 4px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.topic-line button {
+  margin-right: 10px;
+}
+
+#topicBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+#topicList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  padding-left: 4px;
+}
+
+#topicList button {
+  background-color: #4caf50;
+  margin: 8px 0px;
+}
+
+#newTopicInput {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.table-control {
+  display: flex;
+  align-items: center;
+}
+
+#wordTableWrapper {
+  max-height: calc(30px * 15); /* ~20 rows assuming 40px per row */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+thead th:nth-child(1),
+tbody td:nth-child(1) {
+  width: 10%;
+}
+
+thead th:nth-child(2),
+tbody td:nth-child(2) {
+  width: 25%;
+}
+
+thead th:nth-child(3),
+tbody td:nth-child(3) {
+  width: 25%;
+}
+
+thead th:nth-child(4),
+tbody td:nth-child(4) {
+  width: 40%;
+}
+
+
+tr.selected {
+  background-color: #ffe9e9;
+  text-decoration: line-through;
+}
+
+.add-word-btn {
+  margin-left: 10px;
+}
+
+
+td {
+  cursor: default;
+}
+
+td[contenteditable="true"] {
+  background-color: #f0faff;
+  outline: 2px solid #007bff;
+}
+
+td.editable:hover {
+  background-color: #eef;
+  cursor: pointer;
+}
+#notification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+  color: white;
+}
+
+#notification.show {
+  opacity: 1;
+}
+
+#notification.success {
+  background-color: #28a745; /* green */
+}
+
+#notification.error {
+  background-color: #dc3545; /* red */
+}

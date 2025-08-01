@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>English Learning - Home</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div id="notification" class="hidden"></div>
+
+  <header>
+    <h2>English Learning</h2>
+    <div id="topicBar">
+      <!-- <div id="topicList" class="topic-line"></div> -->
+      <input type="text" id="newTopicInput" placeholder="New topic name" />
+      <button onclick="addTopic()">➕ Add Topic</button>
+      <button class="route" onclick="goToExercise()">🏃 Exercise Page</button>
+    </div>
+  </header>
+  <div>
+      <div id="topicList" class="topic-line"></div>
+  </div>
+
+  <main>
+    <div class="table-control">
+      <h2 id="selectedTopicTitle">Select a topic</h2>
+      <span><button onclick="addRow()" class="add-word-btn">➕ Add Word</button></span>
+    </div>
+    <div id="wordTableWrapper">
+      <table id="wordTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>English</th>
+            <th>Vietnamese</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
