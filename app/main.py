@@ -57,11 +57,10 @@ def update_word(word_id: int, word: schemas.WordUpdate, db: Session = Depends(ge
     return {"message": "Updated"}
 
 
-@app.post("/exercise/", response_model=schemas.WordOut)
+@app.post("/exercise/")
 def get_random_word(topic_ids: list[int], db: Session = Depends(get_db)):
     query = db.query(models.Word).filter(models.Word.topic_id.in_(topic_ids)).all()
-    print(len(query))
     if not query:
         raise HTTPException(status_code=404, detail="No words found for selected topics")
     random.shuffle(query)
-    return query[0]
+    return query

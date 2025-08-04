@@ -1,4 +1,5 @@
-let currentWord = null;
+var currentWord = null;
+var listWords = null;
 
 function goToHome() {
   window.location.href = "/static/index.html";
@@ -28,6 +29,17 @@ async function fetchTopics() {
   });
 }
 
+function nextSystemChat() {
+    currentWord = (currentWord + 1) % listWords.length;
+    let text = listWords[currentWord];
+    const chat = document.getElementById("chatBox");
+    const sysMsg = document.createElement("div");
+    sysMsg.className = "message system";
+    sysMsg.innerHTML = `<strong>👉</strong> <span class="note" data-note="${text.note || 'No note'}">${text.vietnamese}</span>`;
+    chat.appendChild(sysMsg);
+    chat.scrollTop = chat.scrollHeight;
+}
+
 async function startExercise() {
     const selected = Array.from(document.querySelectorAll('input[name="topic"]:checked'))
                       .map(cb => Number(cb.value));
@@ -40,32 +52,26 @@ async function startExercise() {
     });
 
     if (!res.ok) return alert("No word found.");
-    currentWord = await res.json();
-
-    const chat = document.getElementById("chatBox");
-    const sysMsg = document.createElement("div");
-    sysMsg.className = "message system";
-    sysMsg.innerHTML = `<strong>👉</strong> <span class="note" data-note="${currentWord.note || 'No note'}">${currentWord.vietnamese}</span>`;
-    chat.appendChild(sysMsg);
-    chat.scrollTop = chat.scrollHeight;
+    listWords = await res.json();
+    currentWord = -1;
+    nextSystemChat();
 }
 
 function submitAnswer() {
     const input = document.getElementById("userInput");
     const answer = input.value.trim();
-    if (!answer || !currentWord) return;
+    if (!answer) return;
 
     const chat = document.getElementById("chatBox");
 
     const userMsg = document.createElement("div");
     userMsg.className = "message user";
-    userMsg.innerHTML = `<strong>🧑</strong> ${answer}<br><br><strong>💡</strong>${currentWord.english}`;
+    userMsg.innerHTML = `<strong>🧑</strong> ${answer}<br><br><strong>💡</strong>${listWords[currentWord].english}`;
     chat.appendChild(userMsg);
 
     input.value = "";
-    currentWord = null;
-
-    startExercise();
+    // currentWord = null;
+    nextSystemChat();
 }
 
 fetchTopics();
