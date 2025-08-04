@@ -8,4 +8,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# docker build -t words-exercise:latest
+# docker run -d --name words-exercise --env-file .env -p 8000:8000 --net host words-exercis:latest
 # uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
