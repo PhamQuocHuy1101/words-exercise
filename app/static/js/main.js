@@ -7,8 +7,8 @@ function showNotification(message = "Saved successfully ✅", type = "success") 
   const box = document.getElementById("notification");
 
   box.textContent = message;
-  box.className = ""; // clear existing classes
-  box.classList.add("show", type); // add "show" and "success" or "error"
+  box.className = "";
+  box.classList.add("show", type);
 
   setTimeout(() => {
     box.classList.remove("show", type);
@@ -73,20 +73,19 @@ function createTd(text, field) {
   td.textContent = text || "";
   td.dataset.field = field;
   td.dataset.edited = "false"
-  td.ondblclick = () => {
+  td.contentEditable = "true";
+  td.onclick = () => {
     let prev = td.textContent.trim()
 
-    td.contentEditable = "true";
     td.focus();
 
     td.onblur = () => {
-      td.contentEditable = "false";
       if (td.textContent.trim() !== prev) {
         td.dataset.edited = "true"
       }
     }
     td.onkeydown = (e) => {
-      if (e.key === "Enter") {
+      if (e.key === "Tab") {
         e.preventDefault();
         td.blur();
       }
@@ -105,10 +104,6 @@ function createEditableRow(index, word) {
   tr.appendChild(tdNum);
 
   fields.forEach(field => {
-    // const td = document.createElement("td");
-    // td.contentEditable = "false";
-    // td.textContent = word[field] || "";
-    // td.dataset.field = field;
     const td = createTd(word[field], field)
     tr.appendChild(td);
   });
@@ -159,6 +154,7 @@ async function saveChanges() {
         break
       }
     }
+
 
     const data = {};
     tds.forEach(td => {
